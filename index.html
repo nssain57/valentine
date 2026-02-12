@@ -1,162 +1,137 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Khushi ❤️</title>
-
-<style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Khushi ❤️</title><style>
 body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#ff9ec4,#ffc0cb);
+  font-family:system-ui,Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#ffeaf3,#fff6fb);
   text-align:center;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
+  min-height:100vh;
+  padding:20px 10px 60px;
 }
 
-.container{
-  padding:20px;
-}
-
-h1{
-  color:white;
-  font-size:clamp(20px,5vw,28px);
-  margin-top:60px;
-}
-
-button{
-  padding:12px 28px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  margin:12px;
-  cursor:pointer;
-  transition:0.25s;
-}
-
-#yes{background:#ff0066;color:white;}
-#yes:active{transform:scale(0.92);}
-
-#no{
-  background:white;
-  position:fixed;
-  left:55%;
-  top:65%;
-}
+h1{margin-top:25px;color:#d63384;font-size:22px;line-height:1.5}
 
 #photo{
   display:none;
-  width:min(80vw,280px);
+  width:90vw;
+  max-width:320px;
+  height:55vh;
+  object-fit:cover;
   border-radius:22px;
-  margin-top:20px;
+  margin-top:18px;
   box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  position:relative;
 }
 
-#message{
-  display:none;
-  color:white;
-  font-size:22px;
-  margin-top:15px;
-  padding:0 12px;
+.btns{margin-top:30px;position:relative;height:140px}
+
+button{
+  padding:14px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+#yes{background:#ff4d88;color:white;box-shadow:0 5px 15px rgba(255,0,102,.3)}
+#yes:hover{transform:scale(1.1)}
+
+#no{
+  position:absolute;
+  background:#555;color:white;
 }
 
 .emoji{
   position:fixed;
-  font-size:28px;
+  top:-40px;
+  font-size:26px;
+  pointer-events:none;
   animation:fall linear forwards;
 }
 
 @keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);}
+  from{transform:translateY(0);opacity:0}
+  15%{opacity:1}
+  to{transform:translateY(110vh);opacity:.9}
 }
 
 .kiss{
-  position:fixed;
-  font-size:24px;
-  animation:kissUp 1.5s ease-out forwards;
+  position:absolute;
+  font-size:32px;
+  animation:kisspop 1.2s ease forwards;
 }
 
-@keyframes kissUp{
-  from{transform:translateY(0) scale(0.5);opacity:1;}
-  to{transform:translateY(-120px) scale(1.4);opacity:0;}
+@keyframes kisspop{
+  0%{transform:translateY(0) scale(.4);opacity:0}
+  30%{opacity:1}
+  100%{transform:translateY(-120px) scale(1.5);opacity:0}
 }
-</style>
-</head>
 
-<body>
-
-<div class="container">
-<h1>hiii meri khushi kaisi ho tum 💖<br>tum bahot beautiful aur cute ho 🌹</h1>
-
+#message{display:none;margin-top:18px;font-size:20px;color:#c2185b;font-weight:600}
+</style></head><body><h1>hiii meri khushi kaisi ho tum 💖<br>tum bahot beautiful ho aur meri favourite ho 🌹</h1><div class="btns">
 <button id="yes">YES 💕</button>
 <button id="no">NO 😜</button>
-
-<br>
-<img src="khushi.jpg" id="photo">
-
-<div id="message">
-meri cutie 🥰 will be my girlfriend 💐  
-I love you so much ❤️
-</div>
-
-<audio id="music">
-<source src="song.mp3" type="audio/mpeg">
-</audio>
-</div>
-
-<script>
+</div><img src="khushi.jpg" id="photo"><div id="message">meri cutie will be my girlfriend 🥰💐 I love you so much ❤️</div><audio id="music" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio><script>
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
 const photo=document.getElementById("photo");
 const music=document.getElementById("music");
 
-// smooth run away (works on touch also)
 function moveNo(){
-  noBtn.style.left=Math.random()*80+"vw";
-  noBtn.style.top=Math.random()*80+"vh";
+  const x=Math.random()*(window.innerWidth-100);
+  const y=Math.random()*80;
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
+
 noBtn.addEventListener("touchstart",moveNo);
 noBtn.addEventListener("mouseover",moveNo);
 
-// YES click celebration
-yesBtn.onclick=()=>{
+yesBtn.addEventListener("click",celebrate);
+
+function celebrate(){
   photo.style.display="block";
   document.getElementById("message").style.display="block";
+
+  music.currentTime=0;
   music.play().catch(()=>{});
 
   emojiRain();
   kissAnimation();
-};
+}
 
-// emoji rain
 function emojiRain(){
-const emojis=["💜","❤️","💕","😘","🥰","💋","🌹","🌺","💐"];
-for(let i=0;i<80;i++){
-  let e=document.createElement("div");
-  e.className="emoji";
-  e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left=Math.random()*100+"vw";
-  e.style.animationDuration=(3+Math.random()*3)+"s";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6000);
-}
+  const emojis=["💜","❤️","💕","😘","🥰","💋","🌺","🌹","💐"];
+  for(let i=0;i<80;i++){
+    const e=document.createElement("div");
+    e.className="emoji";
+    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+  }
 }
 
-// kiss on photo
 function kissAnimation(){
-const rect=photo.getBoundingClientRect();
-for(let i=0;i<12;i++){
-  let k=document.createElement("div");
-  k.className="kiss";
-  k.innerHTML="💋";
-  k.style.left=(rect.left+Math.random()*rect.width)+"px";
-  k.style.top=(rect.top+Math.random()*rect.height)+"px";
-  document.body.appendChild(k);
-  setTimeout(()=>k.remove(),1500);
+  for(let i=0;i<8;i++){
+    setTimeout(()=>{
+      const k=document.createElement("div");
+      k.className="kiss";
+      k.innerText="💋";
+      k.style.left=(photo.offsetLeft+photo.clientWidth/2-10+Math.random()*80-40)+"px";
+      k.style.top=(photo.offsetTop+20+Math.random()*120)+"px";
+      document.body.appendChild(k);
+      setTimeout(()=>k.remove(),1200);
+    },i*250);
+  }
 }
-}
-</script>
-
-</body>
+</script></body>
 </html>
