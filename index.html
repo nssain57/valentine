@@ -8,47 +8,46 @@
 <style>
 body{
   margin:0;
-  padding:0;
-  text-align:center;
   font-family:Arial;
-  background:linear-gradient(to bottom right,#ff9ec4,#ffc0cb);
+  background:linear-gradient(135deg,#ff9ec4,#ffc0cb);
+  text-align:center;
   overflow:hidden;
 }
 
+.container{
+  padding:20px;
+}
+
 h1{
-  margin-top:80px;
   color:white;
-  font-size:26px;
+  font-size:clamp(20px,5vw,28px);
+  margin-top:60px;
 }
 
 button{
-  padding:12px 25px;
+  padding:12px 28px;
   font-size:18px;
   border:none;
-  border-radius:25px;
-  margin:15px;
+  border-radius:30px;
+  margin:12px;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.25s;
 }
 
-#yes{
-  background:#ff0066;
-  color:white;
-}
-
-#yes:active{
-  transform:scale(0.95);
-}
+#yes{background:#ff0066;color:white;}
+#yes:active{transform:scale(0.92);}
 
 #no{
   background:white;
-  position:absolute;
+  position:fixed;
+  left:55%;
+  top:65%;
 }
 
 #photo{
   display:none;
-  width:250px;
-  border-radius:20px;
+  width:min(80vw,280px);
+  border-radius:22px;
   margin-top:20px;
   box-shadow:0 10px 25px rgba(0,0,0,0.3);
 }
@@ -57,76 +56,107 @@ button{
   display:none;
   color:white;
   font-size:22px;
-  margin-top:20px;
-  padding:0 15px;
+  margin-top:15px;
+  padding:0 12px;
 }
 
-.heart{
+.emoji{
   position:fixed;
-  color:red;
-  font-size:24px;
-  animation:float 4s linear infinite;
+  font-size:28px;
+  animation:fall linear forwards;
 }
 
-@keyframes float{
-  0%{transform:translateY(100vh);opacity:1;}
-  100%{transform:translateY(-10vh);opacity:0;}
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+
+.kiss{
+  position:fixed;
+  font-size:24px;
+  animation:kissUp 1.5s ease-out forwards;
+}
+
+@keyframes kissUp{
+  from{transform:translateY(0) scale(0.5);opacity:1;}
+  to{transform:translateY(-120px) scale(1.4);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<h1>hiii meri khushi kaisi ho tum. mai batata hu okay tummmm yaar bahot beautiful ho. or cute ho. bahut bahut pretty ho. or ha meri favourite ho yaar 💖🌹</h1>
+<div class="container">
+<h1>hiii meri khushi kaisi ho tum 💖<br>tum bahot beautiful aur cute ho 🌹</h1>
 
 <button id="yes">YES 💕</button>
 <button id="no">NO 😜</button>
 
 <br>
-
 <img src="khushi.jpg" id="photo">
 
 <div id="message">
-🙀😻 meri cutie will be my 🌹girlfriend 🥰🥰💐 naa nhi bolna  
-aur yaar I love you so much ❤️ bahut phle se
+meri cutie 🥰 will be my girlfriend 💐  
+I love you so much ❤️
 </div>
 
-<audio id="music" preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
+<audio id="music">
+<source src="song.mp3" type="audio/mpeg">
 </audio>
+</div>
 
 <script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const music = document.getElementById("music");
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const photo=document.getElementById("photo");
+const music=document.getElementById("music");
 
-noBtn.addEventListener("mouseover",()=>{
-  noBtn.style.top = Math.random()*80+"%";
-  noBtn.style.left = Math.random()*80+"%";
-});
+// smooth run away (works on touch also)
+function moveNo(){
+  noBtn.style.left=Math.random()*80+"vw";
+  noBtn.style.top=Math.random()*80+"vh";
+}
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
 
-yesBtn.addEventListener("click",celebrate);
-
-function celebrate(){
-  document.getElementById("photo").style.display="block";
+// YES click celebration
+yesBtn.onclick=()=>{
+  photo.style.display="block";
   document.getElementById("message").style.display="block";
-
-  // mobile autoplay fix
-  music.currentTime = 0;
   music.play().catch(()=>{});
 
-  for(let i=0;i<30;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"%";
-    heart.style.animationDuration=(2+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-  }
+  emojiRain();
+  kissAnimation();
+};
+
+// emoji rain
+function emojiRain(){
+const emojis=["💜","❤️","💕","😘","🥰","💋","🌹","🌺","💐"];
+for(let i=0;i<80;i++){
+  let e=document.createElement("div");
+  e.className="emoji";
+  e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+}
+}
+
+// kiss on photo
+function kissAnimation(){
+const rect=photo.getBoundingClientRect();
+for(let i=0;i<12;i++){
+  let k=document.createElement("div");
+  k.className="kiss";
+  k.innerHTML="💋";
+  k.style.left=(rect.left+Math.random()*rect.width)+"px";
+  k.style.top=(rect.top+Math.random()*rect.height)+"px";
+  document.body.appendChild(k);
+  setTimeout(()=>k.remove(),1500);
+}
 }
 </script>
 
 </body>
 </html>
-
-
