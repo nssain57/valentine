@@ -8,27 +8,25 @@ body{
   font-family:system-ui,Arial,Helvetica,sans-serif;
   background:linear-gradient(135deg,#ffd6e7,#ffeaf3,#fff6fb);
   text-align:center;
+  min-height:100dvh;
+  padding:18px 12px 80px;
   overflow-x:hidden;
-  overflow-y:auto;
-  min-height:100vh;
-  padding:20px 10px 60px;
 }
 
-h1{margin-top:25px;color:#d63384;font-size:22px;line-height:1.5}
+h1{margin-top:18px;color:#d63384;font-size:21px;line-height:1.5}
 
 #photo{
   display:none;
-  width:90vw;
-  max-width:320px;
-  height:55vh;
+  width:92vw;
+  max-width:340px;
+  aspect-ratio:3/4;
   object-fit:cover;
   border-radius:22px;
-  margin-top:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.3);
-  position:relative;
+  margin-top:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-.btns{margin-top:30px;position:relative;height:140px}
+.btns{margin-top:26px;height:130px;position:relative}
 
 button{
   padding:14px 28px;
@@ -36,15 +34,16 @@ button{
   border:none;
   border-radius:30px;
   cursor:pointer;
-  transition:.25s ease;
+  transition:.2s ease;
 }
 
-#yes{background:#ff4d88;color:white;box-shadow:0 5px 15px rgba(255,0,102,.3)}
-#yes:hover{transform:scale(1.1)}
+#yes{background:#ff4d88;color:white;box-shadow:0 5px 15px rgba(255,0,102,.25)}
+#yes:active{transform:scale(.94)}
 
 #no{
-  position:absolute;
+  position:fixed;
   background:#555;color:white;
+  top:65vh;left:55vw;
 }
 
 .emoji{
@@ -58,26 +57,28 @@ button{
 @keyframes fall{
   from{transform:translateY(0);opacity:0}
   15%{opacity:1}
-  to{transform:translateY(110vh);opacity:.9}
+  to{transform:translateY(110dvh);opacity:.95}
 }
 
 .kiss{
-  position:absolute;
+  position:fixed;
   font-size:32px;
-  animation:kisspop 1.2s ease forwards;
+  animation:kisspop 1.3s ease forwards;
 }
 
 @keyframes kisspop{
-  0%{transform:translateY(0) scale(.4);opacity:0}
+  0%{transform:translateY(0) scale(.5);opacity:0}
   30%{opacity:1}
-  100%{transform:translateY(-120px) scale(1.5);opacity:0}
+  100%{transform:translateY(-120px) scale(1.4);opacity:0}
 }
 
-#message{display:none;margin-top:18px;font-size:20px;color:#c2185b;font-weight:600}
+#message{display:none;margin-top:16px;font-size:20px;color:#c2185b;font-weight:600}
 </style></head><body><h1>hiii meri khushi kaisi ho tum 💖<br>tum bahot beautiful ho aur meri favourite ho 🌹</h1><div class="btns">
 <button id="yes">YES 💕</button>
-<button id="no">NO 😜</button>
-</div><img src="khushi.jpg" id="photo"><div id="message">meri cutie will be my girlfriend 🥰💐 I love you so much ❤️</div><audio id="music" preload="auto">
+</div><button id="no">NO 😜</button>
+
+<img src="khushi.jpg" id="photo">
+<div id="message">meri cutie will be my girlfriend 🥰💐 I love you so much ❤️</div><audio id="music" preload="auto">
   <source src="song.mp3" type="audio/mpeg">
 </audio><script>
 const noBtn=document.getElementById("no");
@@ -86,51 +87,56 @@ const photo=document.getElementById("photo");
 const music=document.getElementById("music");
 
 function moveNo(){
-  const x=Math.random()*(window.innerWidth-100);
-  const y=Math.random()*80;
-  noBtn.style.transform=`translate(${x}px,${y}px)`;
+  const padding=20;
+  const w=window.innerWidth-noBtn.offsetWidth-padding;
+  const h=window.innerHeight-noBtn.offsetHeight-padding;
+  const x=Math.random()*w+padding/2;
+  const y=Math.random()*h+padding/2;
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
 }
 
-noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("touchstart",e=>{e.preventDefault();moveNo();});
 noBtn.addEventListener("mouseover",moveNo);
 
 yesBtn.addEventListener("click",celebrate);
 
+let rainStarted=false;
 function celebrate(){
   photo.style.display="block";
   document.getElementById("message").style.display="block";
-
-  music.currentTime=0;
-  music.play().catch(()=>{});
-
-  emojiRain();
+  music.currentTime=0;music.play().catch(()=>{});
+  if(!rainStarted){emojiRain();rainStarted=true;}
   kissAnimation();
 }
 
-function emojiRain(){
+function spawnEmoji(){
   const emojis=["💜","❤️","💕","😘","🥰","💋","🌺","🌹","💐"];
-  for(let i=0;i<80;i++){
-    const e=document.createElement("div");
-    e.className="emoji";
-    e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
-    e.style.left=Math.random()*100+"vw";
-    e.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(e);
-    setTimeout(()=>e.remove(),6000);
-  }
+  const e=document.createElement("div");
+  e.className="emoji";
+  e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(6+Math.random()*4)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),11000);
+}
+
+function emojiRain(){
+  setInterval(()=>{for(let i=0;i<2;i++)spawnEmoji();},900);
 }
 
 function kissAnimation(){
-  for(let i=0;i<8;i++){
+  const rect=photo.getBoundingClientRect();
+  for(let i=0;i<6;i++){
     setTimeout(()=>{
       const k=document.createElement("div");
       k.className="kiss";
       k.innerText="💋";
-      k.style.left=(photo.offsetLeft+photo.clientWidth/2-10+Math.random()*80-40)+"px";
-      k.style.top=(photo.offsetTop+20+Math.random()*120)+"px";
+      k.style.left=(rect.left+rect.width/2-10+Math.random()*80-40)+"px";
+      k.style.top=(rect.top+30+Math.random()*120)+"px";
       document.body.appendChild(k);
-      setTimeout(()=>k.remove(),1200);
-    },i*250);
+      setTimeout(()=>k.remove(),1300);
+    },i*260);
   }
 }
 </script></body>
