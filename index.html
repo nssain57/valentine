@@ -107,17 +107,17 @@ button{
   object-fit:cover;
   border-radius:20px;
   box-shadow:0 10px 25px rgba(0,0,0,.35);
-  opacity:1; /* photo always visible */
+  opacity:1; 
 }
 
 .slideLeft{animation:slideLeft .9s ease forwards}
 .slideRight{animation:slideRight .9s ease forwards}
-@keyframes slideLeft{from{transform:translateX(-120px);opacity:0}to{transform:translateX(0);opacity:1}}
-@keyframes slideRight{from{transform:translateX(120px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideLeft{from{transform:translateX(-150px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideRight{from{transform:translateX(150px);opacity:0}to{transform:translateX(0);opacity:1}}
 
 .butterflyGif{
   position:absolute;
-  width:90px;
+  width:80px;
   pointer-events:none;
   opacity:1;
   z-index:3;
@@ -202,6 +202,7 @@ yesBtn.addEventListener('click',()=>{
   mediaRow.style.display='flex';
   message.style.display='block';
   blur.style.display='block';
+
   photo.classList.add('slideLeft');
   flower.classList.add('slideRight');
   music.currentTime=0; music.play().catch(()=>{});
@@ -209,6 +210,8 @@ yesBtn.addEventListener('click',()=>{
   [b1,b2,b3].forEach((b,i)=>{
     b.classList.add('show','orbit');
     b.style.animationDelay=(i*1.5)+'s';
+    b.style.top=(photo.offsetTop + 20 + Math.random()*50)+'px';
+    b.style.left=(photo.offsetLeft + 20 + Math.random()*50)+'px';
   });
 });
 </script>
