@@ -29,17 +29,6 @@ body{
   text-align:center;
 }
 
-.blurLayer{
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  background:rgba(255,255,255,0.35);
-  backdrop-filter:blur(8px);
-  z-index:0;
-}
-
 h1{
   color:#ff4fa3;
   font-size:20px;
@@ -47,8 +36,31 @@ h1{
   margin-bottom:18px;
   font-weight:700;
   text-shadow:0 2px 10px rgba(255,255,255,.6);
-  position:relative;
+}
+
+/* White blur layer behind message only */
+#blurLayer{
+  position:absolute;
+  width:90%;
+  max-width:380px;
+  height:auto;
+  bottom:50px;
+  background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
   z-index:1;
+  display:none;
+}
+
+#message{
+  display:none;
+  margin-top:14px;
+  font-size:19px;
+  color:#ff2f92;
+  font-weight:700;
+  text-shadow:0 2px 10px rgba(255,255,255,.7);
+  position:relative;
+  z-index:2;
 }
 
 .buttons{
@@ -59,7 +71,6 @@ h1{
   justify-content:space-between;
   align-items:center;
   position:relative;
-  z-index:1;
 }
 
 button{
@@ -71,21 +82,10 @@ button{
   transition:.2s ease;
 }
 
-#yes{
-  background:#ff6fb7;
-  color:white;
-  box-shadow:0 6px 18px rgba(255,0,120,.35);
-  z-index:2;
-}
+#yes{background:#ff6fb7;color:white;box-shadow:0 6px 18px rgba(255,0,120,.35)}
 #yes:active{transform:scale(.94)}
 
-#no{
-  position:absolute;
-  left:0;
-  background:#555;
-  color:white;
-  z-index:2;
-}
+#no{position:absolute;left:0;background:#555;color:white}
 
 .mediaRow{
   display:none;
@@ -93,8 +93,6 @@ button{
   align-items:center;
   justify-content:space-between;
   margin-top:10px;
-  position:relative;
-  z-index:1;
 }
 
 .photoWrap{
@@ -103,6 +101,7 @@ button{
   max-width:170px;
   height:42vh;
 }
+
 #photo,#flower{
   width:100%;
   height:100%;
@@ -112,69 +111,67 @@ button{
   opacity:0;
 }
 
-#flower{width:44vw; max-width:170px; height:42vh;}
-
 .slideLeft{animation:slideLeft .9s ease forwards}
 .slideRight{animation:slideRight .9s ease forwards}
 @keyframes slideLeft{from{transform:translateX(-120px);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes slideRight{from{transform:translateX(120px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-#message{
-  display:none;
-  margin-top:14px;
-  font-size:19px;
-  color:#ff2f92;
-  font-weight:700;
-  text-shadow:0 2px 10px rgba(255,255,255,.7);
-  position:relative;
-  z-index:1;
-}
-
+/* Butterflies */
 .butterflyGif{
   position:absolute;
-  width:100px;
+  width:90px;
   pointer-events:none;
   opacity:0;
+  z-index:3;
 }
-.orbit{animation:orbit 10s linear infinite}
-@keyframes orbit{from{transform:rotate(0deg) translateX(95px) rotate(0deg)}to{transform:rotate(360deg) translateX(95px) rotate(-360deg)}}
+.orbit{
+  animation:orbit 6s linear infinite;
+}
+@keyframes orbit{
+  from{transform:rotate(0deg) translateX(95px) rotate(0deg)}
+  to{transform:rotate(360deg) translateX(95px) rotate(-360deg)}
+}
 .show{opacity:1}
-
-@media (max-width:420px){
-  .photoWrap, #flower{width:48vw; height:40vh;}
-  #photo, #flower{width:100%; height:100%;}
-}
 </style>
 </head>
 <body>
+
 <div class="container" id="box">
-  <div class="blurLayer"></div>
-  <h1 id="question">
-    hey khushi kaisi ho tum. Okay m btata 🫣 hu.<br>
-    Tum bahut pyaari 😚 ho. Tum bahut cutie 🥰 ho<br>
-    aur tum bahut bahut pretty 🎉💐😘 ho.<br>
-    aur ha tum meri bahut phle se favourite ho 💕<br><br>
-    Aaj valentine h so...<br>
-    <b>Khushi will be my girlfriend 🌹?</b>
-  </h1>
-  <div class="buttons">
-    <button id="no">NO 😜</button>
-    <button id="yes">YES 💕</button>
-  </div>
-  <div class="mediaRow" id="mediaRow">
-    <div class="photoWrap" id="photoWrap">
-      <img src="khushi.jpg" id="photo">
-      <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b1">
-      <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b2">
-      <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b3">
-      <img src="eommina-heart-493.gif" class="butterflyGif" id="heartGif">
-    </div>
-    <img src="_.jpeg" id="flower">
-  </div>
-  <div id="message">khushi 🥰 yaar i love you so much 🎉💐 aur bahut phle se hi yaar ⌛</div>
+
+<h1 id="question">
+hey khushi kaisi ho tum. Okay m btata 🫣 hu.<br>
+Tum bahut pyaari 😚 ho. Tum bahut cutie 🥰 ho<br>
+aur tum bahut bahut pretty 🎉💐😘 ho.<br>
+aur ha tum meri bahut phle se favourite ho 💕<br><br>
+Aaj valentine h so...<br>
+<b>Khushi will be my girlfriend 🌹?</b>
+</h1>
+
+<div class="buttons">
+  <button id="no">NO 😜</button>
+  <button id="yes">YES 💕</button>
 </div>
 
-<audio id="music" preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
+<div class="mediaRow" id="mediaRow">
+  <div class="photoWrap" id="photoWrap">
+    <img src="khushi.jpg" id="photo">
+    <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b1">
+    <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b2">
+    <img src="dezyne_3d-butterflies-25807_512.gif" class="butterflyGif" id="b3">
+  </div>
+  <img src="_.jpeg" id="flower">
+</div>
+
+<div id="blurLayer"></div>
+<div id="message">
+khushi 🥰 yaar i love you so much 🎉💐 aur bahut phle se hi yaar ⌛
+</div>
+
+</div>
+
+<audio id="music" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const noBtn=document.getElementById('no');
@@ -185,10 +182,11 @@ const music=document.getElementById('music');
 const question=document.getElementById('question');
 const message=document.getElementById('message');
 const mediaRow=document.getElementById('mediaRow');
+const box=document.getElementById('box');
+const blur=document.getElementById('blurLayer');
 const b1=document.getElementById('b1');
 const b2=document.getElementById('b2');
 const b3=document.getElementById('b3');
-const heartGif=document.getElementById('heartGif');
 
 function moveNo(){
   const rect=box.getBoundingClientRect();
@@ -197,6 +195,7 @@ function moveNo(){
   noBtn.style.left=Math.random()*maxX+'px';
   noBtn.style.top=Math.random()*maxY+'px';
 }
+
 noBtn.addEventListener('touchstart',e=>{e.preventDefault();moveNo()});
 noBtn.addEventListener('mouseover',moveNo);
 
@@ -204,11 +203,12 @@ yesBtn.addEventListener('click',()=>{
   question.style.display='none';
   mediaRow.style.display='flex';
   message.style.display='block';
+  blur.style.display='block';
   photo.classList.add('slideLeft');
   flower.classList.add('slideRight');
-  music.currentTime=0;music.play().catch(()=>{});
+  music.currentTime=0; music.play().catch(()=>{});
 
-  [b1,b2,b3,heartGif].forEach((b,i)=>{
+  [b1,b2,b3].forEach((b,i)=>{
     b.classList.add('show','orbit');
     b.style.animationDelay=(i*1.5)+'s';
   });
