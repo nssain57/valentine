@@ -1,100 +1,236 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="color-scheme" content="light">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Khushi ❤️</title>
+
 <style>
-html,body{height:100%;margin:0}
+
+html,body{
+height:100%;
+margin:0;
+}
+
+/* ROMANTIC WALLPAPER BACKGROUND */
 body{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-weight:700;
-  background:
-    linear-gradient(rgba(255,240,246,.75),rgba(255,214,231,.75),rgba(243,217,255,.75)),
-    url('bg.jpg') center/cover no-repeat fixed;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}.container{ position:relative; width:100%; max-width:420px; height:100dvh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 14px 20px; box-sizing:border-box; text-align:center; backdrop-filter: blur(6px); }
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-family: monospace;
+font-weight:bold;
+color:#ff2e8a;
 
-h1{color:#d63384;font-size:20px;line-height:1.5;margin-bottom:18px}
+background: url("bg.jpg") no-repeat center center fixed;
+background-size: cover;
+overflow:hidden;
+}
 
-#photo{ display:none; width:88vw; max-width:300px; height:46vh; object-fit:cover; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.22); margin-top:10px; }
+/* Glass effect card */
+.container{
+backdrop-filter: blur(8px);
+background: rgba(255,255,255,0.25);
+border-radius:22px;
+padding:20px;
+width:90%;
+max-width:420px;
+box-shadow:0 10px 40px rgba(0,0,0,.25);
+}
 
-#message{display:none;margin-top:14px;font-size:19px;color:#c2185b;font-weight:700}
+h1{
+font-size:20px;
+line-height:1.6;
+}
 
-.buttons{ margin-top:12px; width:100%; max-width:300px; display:flex; justify-content:space-between; align-items:center; position:relative; }
+#photo{
+display:none;
+width:260px;
+height:360px;
+object-fit:cover;
+border-radius:18px;
+margin-top:12px;
+box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
 
-button{ padding:14px 26px; font-size:18px; border:none; border-radius:28px; cursor:pointer; transition:.2s ease; font-family:inherit; font-weight:700; }
+#message{
+display:none;
+margin-top:12px;
+font-size:20px;
+}
 
-#yes{background:#4da3ff;color:white;box-shadow:0 6px 18px rgba(0,123,255,.25)} #yes:active{transform:scale(.94)}
+/* buttons */
+.buttons{
+margin-top:18px;
+position:relative;
+height:60px;
+}
 
-#no{position:absolute;left:0;background:#555;color:white}
+button{
+padding:14px 28px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+position:absolute;
+transition:.2s;
+}
 
-.emoji{position:fixed;top:-40px;font-size:26px;pointer-events:none;animation:fall linear forwards} @keyframes fall{from{transform:translateY(0);opacity:0}15%{opacity:1}to{transform:translateY(110dvh);opacity:.95}}
+#yes{
+right:0;
+background:#ff4da6;
+color:white;
+box-shadow:0 6px 20px rgba(255,0,120,.4);
+}
 
-.kiss{position:fixed;font-size:32px;animation:kisspop 1.3s ease forwards} @keyframes kisspop{0%{transform:translateY(0) scale(.5);opacity:0}30%{opacity:1}100%{transform:translateY(-120px) scale(1.4);opacity:0}} </style>
+#no{
+left:0;
+background:#444;
+color:white;
+}
 
+/* floating hearts */
+.emoji{
+position:fixed;
+top:-40px;
+font-size:24px;
+animation:fall linear forwards;
+pointer-events:none;
+}
+@keyframes fall{
+to{transform:translateY(110vh);opacity:.9}
+}
+
+/* kiss pop */
+.kiss{
+position:fixed;
+font-size:30px;
+animation:kiss 1.2s ease forwards;
+}
+@keyframes kiss{
+0%{transform:scale(.5);opacity:0}
+50%{opacity:1}
+100%{transform:translateY(-120px) scale(1.5);opacity:0}
+}
+
+/* BUTTERFLIES */
+.butterfly{
+position:fixed;
+font-size:26px;
+animation:fly 4s linear infinite;
+pointer-events:none;
+}
+@keyframes fly{
+0%{transform:translate(0,0)}
+25%{transform:translate(40px,-30px)}
+50%{transform:translate(-30px,-60px)}
+75%{transform:translate(20px,-20px)}
+100%{transform:translate(0,0)}
+}
+
+</style>
 </head>
+
 <body>
+
 <div class="container" id="box">
-<h1 id="question">hey khushi kaisi ho tum. Okay m btata 🫣 hu.<br>
+
+<h1 id="question">
+hey khushi kaisi ho tum. Okay m btata 🫣 hu.<br>
 Tum bahut pyaari 😚 ho. Tum bahut cutie 🥰 ho<br>
 aur tum bahut bahut pretty 🎉💐😘 ho.<br>
 aur ha tum meri bahut phle se favourite ho 💕<br><br>
-Aaj valentine h so...<br><b>Khushi will be my girlfriend 🌹?</b></h1>
+Aaj valentine h so...<br>
+<b>Khushi will be my girlfriend 🌹?</b>
+</h1>
+
 <div class="buttons">
 <button id="no">NO 😜</button>
 <button id="yes">YES 💕</button>
 </div>
+
 <img src="khushi.jpg" id="photo">
 <div id="message">khushi 🥰 yaar i love you so much 🎉💐 aur bahut phle se hi yaar ⌛</div>
+
 </div>
-<audio id="music" preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
+
+<audio id="music">
+<source src="song.mp3" type="audio/mpeg">
 </audio>
+
 <script>
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
 const photo=document.getElementById("photo");
-const music=document.getElementById("music");
-const question=document.getElementById("question");
 const message=document.getElementById("message");
-const box=document.getElementById("box");function moveNo(){ const rect=box.getBoundingClientRect(); const maxX=rect.width-noBtn.offsetWidth; const maxY=120; noBtn.style.left=Math.random()*maxX+"px"; noBtn.style.top=Math.random()*maxY+"px"; } noBtn.addEventListener("touchstart",e=>{e.preventDefault();moveNo();}); noBtn.addEventListener("mouseover",moveNo);
+const question=document.getElementById("question");
+const music=document.getElementById("music");
+const box=document.getElementById("box");
 
-let rainStarted=false; yesBtn.addEventListener("click",()=>{ question.style.display="none"; photo.style.display="block"; message.style.display="block"; music.currentTime=0;music.play().catch(()=>{}); if(!rainStarted){emojiRain();rainStarted=true} kissAnimation(); });
+function moveNo(){
+const rect=box.getBoundingClientRect();
+const maxX=rect.width-noBtn.offsetWidth;
+const maxY=80;
+noBtn.style.left=Math.random()*maxX+"px";
+noBtn.style.top=Math.random()*maxY+"px";
+}
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",e=>{e.preventDefault();moveNo();});
 
-function spawnEmoji(){ const emojis=["💜","❤️","💕","😘","🥰","💋","🌺","🌹","💐"]; const e=document.createElement("div"); e.className="emoji"; e.innerText=emojis[Math.floor(Math.random()*emojis.length)]; e.style.left=Math.random()*100+"vw"; e.style.animationDuration=(7+Math.random()*4)+"s"; document.body.appendChild(e); setTimeout(()=>e.remove(),12000); } function emojiRain(){setInterval(()=>spawnEmoji(),800)}
+/* YES CLICK */
+yesBtn.onclick=()=>{
+question.style.display="none";
+photo.style.display="block";
+message.style.display="block";
+music.play().catch(()=>{});
 
-function kissAnimation(){ const rect=photo.getBoundingClientRect(); for(let i=0;i<6;i++){ setTimeout(()=>{ const k=document.createElement("div"); k.className="kiss"; k.innerText="💋"; k.style.left=(rect.left+rect.width/2-10+Math.random()*80-40)+"px"; k.style.top=(rect.top+30+Math.random()120)+"px"; document.body.appendChild(k); setTimeout(()=>k.remove(),1300); },i260); } } </script>
+heartRain();
+kiss();
+butterflies();
+};
 
-  <style>
-    .butterfly{position:absolute;font-size:22px;pointer-events:none;animation:fly 6s linear infinite;opacity:.9}
-    @keyframes fly{0%{transform:translateY(0) translateX(0) scale(.7);opacity:0}10%{opacity:1}50%{transform:translateY(-180px) translateX(60px) scale(1)}100%{transform:translateY(-360px) translateX(-60px) scale(1.1);opacity:0}}
-  </style>  <script>
-    function createButterfly(x,y){
-      const b=document.createElement('div');
-      b.className='butterfly';
-      b.textContent='🦋';
-      b.style.left=x+'px';
-      b.style.top=y+'px';
-      document.body.appendChild(b);
-      setTimeout(()=>b.remove(),6000);
-    }
+/* hearts */
+function heartRain(){
+setInterval(()=>{
+const e=document.createElement("div");
+e.className="emoji";
+e.innerText=["💖","💕","💗","💞","💓"][Math.floor(Math.random()*5)];
+e.style.left=Math.random()*100+"vw";
+e.style.animationDuration=(6+Math.random()*4)+"s";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),10000);
+},500);
+}
 
-    const yesBtn=document.getElementById('yesBtn');
-    if(yesBtn){
-      yesBtn.addEventListener('click',()=>{
-        const img=document.querySelector('img');
-        if(!img) return;
-        const rect=img.getBoundingClientRect();
-        setInterval(()=>{
-          const x=rect.left+Math.random()*rect.width;
-          const y=rect.top+rect.height*0.7+Math.random()*20;
-          createButterfly(x,y);
-        },500);
-      });
-    }
-  </script></body>
+/* kiss */
+function kiss(){
+const rect=photo.getBoundingClientRect();
+for(let i=0;i<6;i++){
+setTimeout(()=>{
+const k=document.createElement("div");
+k.className="kiss";
+k.innerText="💋";
+k.style.left=(rect.left+rect.width/2)+"px";
+k.style.top=(rect.top+100)+"px";
+document.body.appendChild(k);
+setTimeout(()=>k.remove(),1200);
+},i*250);
+}
+}
+
+/* butterflies near photo */
+function butterflies(){
+const rect=photo.getBoundingClientRect();
+for(let i=0;i<5;i++){
+const b=document.createElement("div");
+b.className="butterfly";
+b.innerText=["🦋","🦋","🦋"][Math.floor(Math.random()*3)];
+b.style.left=(rect.left+Math.random()*rect.width)+"px";
+b.style.top=(rect.top+Math.random()*rect.height)+"px";
+document.body.appendChild(b);
+}
+}
+</script>
+
+</body>
 </html>
