@@ -35,6 +35,7 @@ button{
 
 .mediaRow{
   display:none;width:100%;align-items:center;justify-content:space-between;margin-top:10px;
+  position:relative;
 }
 .photoWrap{position:relative;width:44vw;max-width:170px;height:42vh}
 #photo{width:100%;height:100%;object-fit:cover;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,.35);opacity:0}
@@ -54,7 +55,7 @@ button{
 }
 
 .butterflyGif{
-  position:absolute;width:500px;pointer-events:none;opacity:0
+  position:absolute;width:500px;pointer-events:none;opacity:0;z-index:5;
 }
 .orbit{animation:orbit 6s linear infinite}
 @keyframes orbit{
@@ -131,8 +132,10 @@ yesBtn.addEventListener('click',()=>{
   flower.classList.add('slideRight');
   music.currentTime=0;music.play().catch(()=>{});
 
+  // butterflies above both photos
   [b1,b2,b3].forEach((b,i)=>{
     b.classList.add('show','orbit');
+    b.style.top='-60px'; // upar se photos ke upar start
     b.style.animationDelay=(i*1.2)+'s';
   });
 });
